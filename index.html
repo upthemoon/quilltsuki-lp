@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quilltsuki（クイルツキ）— 写真と一行で、月のように積む日記</title>
+<meta name="description" content="1日3秒、写真1枚と一言だけ。月相と「第Nの月」が記録に静かな手触りを与える、iPhone 向け写真日記アプリ。基本機能すべて無料・8月末公開予定。">
+<meta property="og:title" content="Quilltsuki — 写真と一行で、月のように積む日記">
+<meta property="og:description" content="1日3秒、写真1枚と一言だけ。月相と「第Nの月」で記録を積む iPhone アプリ。8月末公開予定。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quilltsuki.upthemoon.co.jp/">
+<meta property="og:image" content="https://quilltsuki.upthemoon.co.jp/icon-1024.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon-60.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0B09;
+    --bg-soft: #14110E;
+    --gold: #B8975A;
+    --gold-soft: rgba(184, 151, 90, 0.18);
+    --gold-fade: rgba(184, 151, 90, 0.08);
+    --fg: #F5F5F5;
+    --fg-soft: #8A8070;
+    --fg-mid: #C8C0B0;
+    --divider: rgba(184, 151, 90, 0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.95;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { opacity: 0.7; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* タイポグラフィ */
+  h1, h2, h3 { font-family: "Noto Serif JP", "Times New Roman", serif; font-weight: 500; letter-spacing: 0.02em; line-height: 1.4; }
+  h1 { font-size: clamp(34px, 6vw, 60px); font-weight: 500; letter-spacing: 0.04em; }
+  h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 24px; }
+  h3 { font-size: 20px; margin-bottom: 12px; }
+  .eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-sub { color: var(--fg-soft); margin-bottom: 48px; font-size: 15px; }
+
+  /* セクション共通 */
+  section { padding: 96px 0; border-top: 1px solid var(--divider); }
+  section:first-of-type { border-top: none; }
+
+  /* ヘッダー */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13, 11, 9, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .logo {
+    font-family: "Inter", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--fg);
+  }
+  .logo .moon { color: var(--gold); margin-right: 8px; }
+  .nav-links { display: flex; gap: 28px; font-size: 13px; }
+  .nav-links a { color: var(--fg-mid); }
+  .nav-links a:hover { color: var(--gold); opacity: 1; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero {
+    padding: 160px 0 96px;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 130px 0 64px; min-height: auto; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  .hero h1 .accent { color: var(--gold); }
+  .hero .lead {
+    color: var(--fg-mid);
+    margin: 32px 0 40px;
+    font-size: 16px;
+    line-height: 2;
+  }
+  .hero-meta {
+    margin-top: 24px;
+    color: var(--fg-soft);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  .hero-meta span { margin-right: 12px; }
+  .hero-image { display: flex; justify-content: center; }
+  .hero-image img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--gold-soft);
+  }
+
+  /* CTA ボタン */
+  .cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: #C9A66B; opacity: 1; }
+  .btn-primary[disabled] {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--fg-mid);
+    border: 1px solid var(--divider);
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); opacity: 1; }
+
+  /* Pain */
+  .pain-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 48px;
+    margin-top: 16px;
+  }
+  @media (max-width: 640px) { .pain-list { grid-template-columns: 1fr; gap: 28px; } }
+  .pain-item h3 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+  .pain-item p { color: var(--fg-soft); font-size: 14px; line-height: 1.9; }
+  .pain-item .num {
+    font-family: "Inter", sans-serif;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    margin-bottom: 8px;
+  }
+
+  /* Features */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 56px 64px;
+  }
+  @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; gap: 56px; } }
+  .feature-card { display: flex; flex-direction: column; }
+  .feature-num {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .feature-card h3 {
+    font-family: "Noto Serif JP", serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .feature-card .desc {
+    color: var(--fg-mid);
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .feature-card ul {
+    list-style: none;
+    color: var(--fg-soft);
+    font-size: 13.5px;
+    line-height: 2;
+  }
+  .feature-card ul li::before {
+    content: "—";
+    color: var(--gold);
+    margin-right: 10px;
+    opacity: 0.6;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+  @media (max-width: 640px) { .pricing-grid { grid-template-columns: 1fr; } }
+  .pricing-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 36px 32px;
+  }
+  .pricing-card.featured { border-color: var(--gold); background: linear-gradient(180deg, var(--gold-fade), var(--bg-soft) 40%); }
+  .plan-name {
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .price {
+    font-family: "Noto Serif JP", serif;
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .price small { font-size: 14px; color: var(--fg-soft); }
+  .pricing-card ul {
+    list-style: none;
+    margin-top: 20px;
+    color: var(--fg-mid);
+    font-size: 14px;
+    line-height: 2.1;
+  }
+  .pricing-card ul li::before {
+    content: "—";
+    color: var(--gold);
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+  .pricing-note { margin-top: 32px; color: var(--fg-soft); font-size: 14px; text-align: center; font-style: italic; }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--divider);
+    padding: 24px 0;
+  }
+  .faq-item h3 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 12px;
+  }
+  .faq-item h3::before {
+    content: "Q. ";
+    color: var(--gold);
+    font-family: "Inter", sans-serif;
+  }
+  .faq-item p {
+    color: var(--fg-soft);
+    font-size: 14px;
+    line-height: 1.95;
+  }
+
+  /* Contact */
+  .contact-form {
+    max-width: 560px;
+    margin: 32px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    background: var(--bg-soft);
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 14px;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .contact-form textarea { min-height: 140px; resize: vertical; }
+
+  /* CTA-final */
+  .cta-final {
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+    padding: 120px 0;
+  }
+  .cta-final h2 {
+    font-family: "Noto Serif JP", serif;
+    font-size: clamp(28px, 5vw, 44px);
+    margin-bottom: 24px;
+  }
+  .cta-final p { color: var(--fg-soft); margin-bottom: 40px; font-size: 14px; }
+  .cta-final .note { font-size: 13px; margin-top: 20px; color: var(--fg-soft); }
+
+  /* Footer */
+  footer {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--fg-soft);
+    font-size: 12px;
+    border-top: 1px solid var(--divider);
+    letter-spacing: 0.05em;
+  }
+  footer .links { margin-top: 12px; }
+  footer .links a { margin: 0 12px; color: var(--fg-soft); }
+  footer .links a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo"><span class="moon">☾</span>QUILLTSUKI</div>
+    <div class="nav-links">
+      <a href="#features">機能</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">For Quiet Record Keepers</div>
+        <h1>1日3秒、<br>写真と言葉を<br><span class="accent">月のように</span>積む。</h1>
+        <p class="lead">
+          忙しい夜も、たった1枚と一言でいい。<br>
+          写真と言葉が月ごとに積み重なることで、<br>
+          振り返りたくなる日記が、自然とできあがります。
+        </p>
+        <div class="cta-group">
+          <button class="btn btn-primary" disabled>App Store で入手 (Coming Soon)</button>
+          <a href="#features" class="btn btn-ghost">画面を見る</a>
+        </div>
+        <div class="hero-meta">
+          <span>基本機能すべて無料</span><span>·</span><span>クレカ登録不要</span><span>·</span><span>iPhone 対応</span>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="qt-0.png" alt="Quilltsuki のホーム画面" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pain">
+  <div class="container-narrow">
+    <div class="eyebrow">Problems</div>
+    <h2>こんな経験、ありませんか？</h2>
+    <p class="section-sub">日記が続かない人の「あるある」</p>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="num">01</div>
+        <h3>「三日坊主」が何年も続いている</h3>
+        <p>やる気のあるうちはノートや Day One を開きますが、2週間後には白紙。書かなかった罪悪感だけが残ります。</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">02</div>
+        <h3>カメラロールに写真が溜まるだけで振り返らない</h3>
+        <p>年末に「今年も結局何も残っていない」と気づく。写真は3000枚あっても、記憶はゼロです。</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">03</div>
+        <h3>日記アプリが「書くこと」を要求してくる</h3>
+        <p>長文のプロンプト、タグ付け、気分記録。続けるほど「仕事」になってしまいます。</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">04</div>
+        <h3>過去の自分に戻る手段がない</h3>
+        <p>去年の今日、何を考えていたか。写真だけではわからない。言葉だけでは薄い。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="eyebrow">Features</div>
+    <h2>Quilltsuki が、変えること</h2>
+    <p class="section-sub">4つの軸で「続く記録」を設計しました</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01</div>
+        <h3>1:1の写真と、一言だけ</h3>
+        <p class="desc">入力欄は1行のみ。1枚の写真と短い言葉が、3秒で今日を切り取ります。</p>
+        <ul>
+          <li>写真は正方形1:1固定。スクロール不要の1画面で完結します。</li>
+          <li>文字数に上限を設けており、長文は書けない設計です。</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02</div>
+        <h3>カレンダーが、月の記録帖になる</h3>
+        <p class="desc">月グリッドにサムネイルが埋まるほど、過去の自分が見えてきます。</p>
+        <ul>
+          <li>月ごとにスワイプ移動・月相ドットで未投稿日を視覚化</li>
+          <li>過去の日付にも遡ってバックフィル可能</li>
+          <li>30日より前は Pro でアンロック（フリーでも写真は薄く表示）</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03</div>
+        <h3>今日の月相と「第Nの月」</h3>
+        <p class="desc">記録した日の月相を自動計算。年の何日目かを「第Nの月」として刻みます。</p>
+        <ul>
+          <li>synodic 周期29.53日で月相を毎日更新</li>
+          <li>「第Nの月」= 元日からの通算日数</li>
+          <li>スプラッシュ画面にも今日の月が現れる</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">04</div>
+        <h3>チェキ風の共有カードを1タップで</h3>
+        <p class="desc">9:16縦型カードに写真・言葉・日付・月相が収まり、そのまま SNS へ。</p>
+        <ul>
+          <li>カードに URL を自動付与</li>
+          <li>ブランドロゴ非表示は Pro 機能</li>
+          <li>Today タブから直接共有ボタン</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="container-narrow">
+    <div class="eyebrow">Pricing</div>
+    <h2>料金</h2>
+    <p class="section-sub">記録を始めるのは無料。続けたくなったら Pro へ。</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Free</div>
+        <div class="price">¥0 <small>/ 永久無料</small></div>
+        <ul>
+          <li>1日1枚・一言の記録</li>
+          <li>直近30日のカレンダー閲覧</li>
+          <li>今日の月相・「第Nの月」</li>
+          <li>共有カード生成（ブランドロゴ付き）</li>
+        </ul>
+      </div>
+      <div class="pricing-card featured">
+        <div class="plan-name">Pro</div>
+        <div class="price">¥480 <small>/ 月</small></div>
+        <div style="color: var(--fg-soft); font-size: 13px; margin-top: 4px;">または ¥3,600 / 年（月換算 ¥300 相当）</div>
+        <ul>
+          <li>過去すべての記録に無制限アクセス</li>
+          <li>月別 PDF エクスポート</li>
+          <li>共有カードのブランドロゴ非表示</li>
+          <li>iCloud Drive バックアップ</li>
+          <li>今後の Pro 機能すべて</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pricing-note">「Pro を見る」は30日後でいい。まず積んでみましょう。</p>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container-narrow">
+    <div class="eyebrow">FAQ</div>
+    <h2>よくある質問</h2>
+    <p class="section-sub">使い始める前に、気になるポイント</p>
+    <div class="faq-item">
+      <h3>無料でどこまで使えますか？</h3>
+      <p>記録・閲覧・共有カード生成まで、直近30日分は完全無料です。30日より前の記録は写真だけ薄く表示され、タップすると Pro 案内が出ます。クレカ登録は不要です。</p>
+    </div>
+    <div class="faq-item">
+      <h3>日記が続かない自分でも大丈夫ですか？</h3>
+      <p>入力欄は1行のみで、長文を求めません。写真1枚と短い言葉が3秒で残せる設計にしているので、「書かなきゃ」のプレッシャーがありません。</p>
+    </div>
+    <div class="faq-item">
+      <h3>サインインは必要ですか？</h3>
+      <p>不要です。v1.0 はローカル保存のみで動作します。</p>
+    </div>
+    <div class="faq-item">
+      <h3>Android 版はありますか？</h3>
+      <p>現在は iOS 版のみです。Android 版は需要を見ながら検討します。</p>
+    </div>
+    <div class="faq-item">
+      <h3>解約方法は？</h3>
+      <p>iPhone の「設定」→「Apple ID」→「サブスクリプション」からいつでも解約できます。解約後も無料の機能と直近30日の記録はそのまま残ります。</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container-narrow">
+    <div class="eyebrow">Contact</div>
+    <h2>お問い合わせ</h2>
+    <p class="section-sub">ご質問・不具合報告など、お気軽にどうぞ</p>
+    <form class="contact-form" action="https://formspree.io/f/xwvywkpw" method="POST">
+      <input type="hidden" name="_subject" value="[Quilltsuki LP] お問い合わせ">
+      <input type="text" name="name" placeholder="お名前" required>
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <textarea name="message" placeholder="ご質問・ご感想・不具合報告など" required></textarea>
+      <button type="submit" class="btn btn-primary">送信する</button>
+    </form>
+  </div>
+</section>
+
+<section class="cta-final" id="download">
+  <div class="container-narrow">
+    <h2>あなたの今日に、<br>言葉をひとつ。</h2>
+    <p>クレカ登録不要・基本機能ぜんぶ無料</p>
+    <button class="btn btn-primary" disabled>App Store で入手する (Coming Soon・審査中)</button>
+    <p class="note">現在 Apple 審査中・公開後すぐに通知が届くメールフォームは、<a href="#contact">こちらからどうぞ</a>。</p>
+  </div>
+</section>
+
+<footer>
+  <div>Quilltsuki — Up the Moon合同会社</div>
+  <div class="links">
+    <a href="https://upthemoon.co.jp/">Up the Moon</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+  <div style="margin-top: 16px; opacity: 0.6;">© 2026 Up the Moon LLC. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
