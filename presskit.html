@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Press Kit — Quilltsuki 2.0</title>
+<meta name="description" content="Press kit for Quilltsuki 2.0 — a minimal photo journal for iOS with PDF photobook export and a Bluetooth LE friends calendar. Launching October 2026 from Up the Moon LLC, Japan.">
+<meta property="og:title" content="Press Kit — Quilltsuki 2.0">
+<meta property="og:description" content="Photo journal with PDF photobook export and Bluetooth LE friends calendar. October 2026 launch.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quilltsuki.upthemoon.co.jp/presskit.html">
+<meta property="og:image" content="https://quilltsuki.upthemoon.co.jp/icon-1024.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon-60.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0B09;
+    --bg-soft: #14110E;
+    --gold: #B8975A;
+    --gold-soft: rgba(184, 151, 90, 0.18);
+    --gold-fade: rgba(184, 151, 90, 0.08);
+    --vermilion: #C04A38;
+    --vermilion-soft: rgba(192, 74, 56, 0.14);
+    --fg: #F5F5F5;
+    --fg-soft: #8A8070;
+    --fg-mid: #C8C0B0;
+    --divider: rgba(184, 151, 90, 0.18);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.95;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--gold); text-decoration: none; transition: opacity 0.2s ease; }
+  a:hover { opacity: 0.7; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-family: "Noto Serif JP", "Times New Roman", serif; font-weight: 500; letter-spacing: 0.02em; line-height: 1.4; }
+  h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 500; letter-spacing: 0.04em; }
+  h2 { font-size: clamp(24px, 3.4vw, 34px); margin-bottom: 28px; }
+  h3 { font-size: 1.125rem; margin-bottom: 12px; color: var(--gold); }
+  p { margin-bottom: 18px; color: var(--fg-mid); font-size: 0.9375rem; }
+  .eyebrow {
+    font-family: "Inter", sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 300;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-sub { color: var(--fg-soft); margin-bottom: 48px; font-size: 0.9375rem; }
+
+  section { padding: 88px 0; border-top: 1px solid var(--divider); }
+  section:first-of-type { border-top: none; }
+
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13, 11, 9, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; max-width: 1080px; margin: 0 auto; }
+  .logo {
+    font-family: "Inter", sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--fg);
+  }
+  .logo .moon { color: var(--gold); margin-right: 8px; }
+  .nav-links { display: flex; gap: 28px; font-size: 0.8125rem; }
+  .nav-links a { color: var(--fg-mid); }
+  .nav-links a:hover { color: var(--gold); opacity: 1; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero {
+    padding: 140px 0 72px;
+  }
+  .hero h1 .accent { color: var(--gold); }
+  .hero-subtitle {
+    margin: 18px 0 0;
+    color: var(--fg-mid);
+    font-family: "Noto Serif JP", "Times New Roman", serif;
+    font-size: clamp(18px, 2.4vw, 24px);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+  .hero .lead {
+    color: var(--fg-mid);
+    margin: 28px 0 36px;
+    font-size: 1rem;
+    line-height: 2;
+    max-width: 640px;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    color: var(--fg-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-family: "Inter", sans-serif;
+  }
+  .hero-meta span { margin-right: 12px; }
+
+  /* Press kit body */
+  .pk-block { margin-bottom: 40px; }
+  .pk-block:last-child { margin-bottom: 0; }
+  .pk-block p { font-size: 1rem; line-height: 1.9; color: var(--fg-mid); }
+  .pk-block strong { color: var(--fg); font-weight: 500; }
+  .pk-block em {
+    color: var(--gold);
+    font-style: normal;
+    font-family: "Noto Serif JP", serif;
+    font-size: 1.0625rem;
+    letter-spacing: 0.04em;
+  }
+  .pk-feature {
+    border-left: 1px solid var(--gold-soft);
+    padding-left: 22px;
+    margin-bottom: 26px;
+  }
+  .pk-feature-title {
+    color: var(--gold);
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .pk-feature p { font-size: 0.9375rem; margin-bottom: 0; }
+
+  /* Design notes section */
+  .design-notes {
+    background: var(--bg-soft);
+  }
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 24px;
+  }
+  @media (max-width: 768px) {
+    .design-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+  .design-card {
+    padding: 32px 24px;
+    background: var(--bg);
+    border: 1px solid var(--divider);
+    border-radius: 4px;
+    position: relative;
+  }
+  .design-card .seal {
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    width: 32px;
+    height: 40px;
+    background: var(--vermilion);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Noto Serif JP", serif;
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 0;
+    box-shadow: 0 4px 12px var(--vermilion-soft);
+  }
+  .design-card h3 { color: var(--fg); margin-bottom: 14px; }
+  .design-card p { font-size: 0.9375rem; margin-bottom: 0; }
+
+  /* Facts table */
+  .facts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  .facts-table th, .facts-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--divider);
+    font-size: 0.9375rem;
+  }
+  .facts-table th {
+    color: var(--gold);
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    width: 32%;
+  }
+  .facts-table td { color: var(--fg-mid); word-break: break-word; }
+
+  /* Asset grid */
+  .asset-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 20px;
+  }
+  @media (max-width: 640px) { .asset-grid { grid-template-columns: 1fr; } }
+  .asset-card {
+    padding: 22px;
+    border: 1px solid var(--divider);
+    border-radius: 4px;
+    background: var(--bg-soft);
+  }
+  .asset-card h3 { color: var(--fg); font-size: 1rem; margin-bottom: 8px; }
+  .asset-card p { font-size: 0.8125rem; margin-bottom: 12px; color: var(--fg-soft); }
+  .asset-card .placeholder {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px dashed var(--gold-soft);
+    color: var(--fg-soft);
+    font-size: 0.75rem;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Contact */
+  .contact-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--divider);
+    padding: 32px 28px;
+    border-radius: 4px;
+  }
+  .contact-card p { font-size: 0.9375rem; margin-bottom: 8px; }
+  .contact-card .label {
+    color: var(--gold);
+    font-family: "Inter", sans-serif;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-right: 12px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--divider);
+    text-align: center;
+    color: var(--fg-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    font-family: "Inter", sans-serif;
+  }
+  footer a { color: var(--fg-soft); margin: 0 12px; }
+  footer a:hover { color: var(--gold); }
+
+  /* Btn */
+  .btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--gold-soft);
+    color: var(--gold);
+    transition: all 0.2s ease;
+  }
+  .btn:hover { background: var(--gold-soft); opacity: 1; }
+  .btn:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="/" class="logo"><span class="moon">☾</span>QUILLTSUKI</a>
+    <div class="nav-links">
+      <a href="/#features">App</a>
+      <a href="#about">About</a>
+      <a href="#design">Design</a>
+      <a href="#facts">Facts</a>
+      <a href="#contact">Press Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Press Kit · October 2026</div>
+    <h1>Quilltsuki <span class="accent">2.0</span></h1>
+    <p class="hero-subtitle">Photo Journal &middot; Photobook &middot; Friends Calendar</p>
+    <p class="lead">
+      A minimal photo journal for iOS that turns daily moments into a printed photobook —
+      and makes sharing with close friends feel physical again.
+    </p>
+    <div class="hero-meta">
+      <span>iOS</span><span>·</span><span>October 2026</span><span>·</span><span>Up the Moon LLC · Japan</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container-narrow">
+    <div class="eyebrow">About</div>
+    <h2>The Press Kit</h2>
+    <p class="section-sub">228 words · Distribution-ready for international press</p>
+
+    <div class="pk-block">
+      <p><strong>Quilltsuki 2.0 — Photo Journal, Photobook, and the Friends Calendar</strong></p>
+      <p><em>A journal is not just for the day you write, but for the day you look back.</em></p>
+      <p>Quilltsuki 2.0 is a minimal photo journal for iOS that turns daily moments into a printed photobook — and makes sharing with close friends feel physical again.</p>
+    </div>
+
+    <div class="pk-block">
+      <h3>Core features</h3>
+
+      <div class="pk-feature">
+        <span class="pk-feature-title">Photobook PDF export</span>
+        <p>Every entry you write becomes a page. Choose from four formats: monthly (12p), seasonal (30p), six-month (60p), or annual (120p). Export to PDF, order a print, hold the year in your hands.</p>
+      </div>
+
+      <div class="pk-feature">
+        <span class="pk-feature-title">Friends Calendar via Bluetooth LE</span>
+        <p>Connect with a friend code and exchange calendars only when you are physically nearby. No location data is used. Visibility expires after 24 hours. The idea is a direct response to the exhaustion of always-on social feeds.</p>
+      </div>
+
+      <div class="pk-feature">
+        <span class="pk-feature-title">Moon-phase design</span>
+        <p>The interface moves from new moon to full moon as the month progresses. Washi paper texture and a vermilion seal motif are woven through every screen — purposeful, not decorative.</p>
+      </div>
+
+      <div class="pk-feature">
+        <span class="pk-feature-title">Fully free</span>
+        <p>Every feature is available at no cost. Pro (¥480/month or ¥3,800/year) adds identity features — a Pro badge and zero ads.</p>
+      </div>
+
+      <div class="pk-feature">
+        <span class="pk-feature-title">Pioneer pass</span>
+        <p>Users who join before August 31, 2026 — or among the first 500 — receive Pro free, permanently.</p>
+      </div>
+    </div>
+
+    <div class="pk-block">
+      <p>Built in React Native with Expo New Architecture by Ryo, a solo iOS developer based in Japan under Up the Moon LLC.</p>
+      <p>Quilltsuki 2.0 launches for iOS in October 2026.</p>
+    </div>
+  </div>
+</section>
+
+<section id="design" class="design-notes">
+  <div class="container-narrow">
+    <div class="eyebrow">Design Notes</div>
+    <h2>Moon phase · Washi paper · Vermilion seal</h2>
+    <p class="section-sub">Three motifs from Japanese craft, intentionally woven through every screen.</p>
+
+    <div class="design-grid">
+      <div class="design-card">
+        <div class="seal" role="img" aria-label="Moon-phase seal motif">月</div>
+        <h3>Moon-phase calendar</h3>
+        <p>The synodic cycle (29.53 days) drives a subtle gradient from new moon to full moon across the month grid. As you record, your days become moons. The calendar is not a tracker — it is a record of how time passed.</p>
+      </div>
+
+      <div class="design-card">
+        <div class="seal" role="img" aria-label="Washi paper seal motif">紙</div>
+        <h3>Washi paper texture</h3>
+        <p>Every background carries the grain of handmade washi. The texture is not skeuomorphic decoration — it is the visual anchor for the app's slowness. Each entry rests on paper, not on a screen.</p>
+      </div>
+
+      <div class="design-card">
+        <div class="seal" role="img" aria-label="Vermilion rakkan seal motif">朱</div>
+        <h3>Vermilion seal motif</h3>
+        <p>A single vermilion square — borrowed from the Japanese <em>rakkan</em> (落款) seal tradition — marks the day's record. The color is restrained, used only once per screen. It is the punctuation of the design language.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="facts">
+  <div class="container-narrow">
+    <div class="eyebrow">Key Facts</div>
+    <h2>At a glance</h2>
+
+    <table class="facts-table">
+      <tr><th>Name</th><td>Quilltsuki (クイルツキ)</td></tr>
+      <tr><th>Version</th><td>2.0</td></tr>
+      <tr><th>Platform</th><td>iOS (iPhone)</td></tr>
+      <tr><th>Launch</th><td>October 2026</td></tr>
+      <tr><th>Price</th><td>Free · Pro at ¥480/month or ¥3,800/year</td></tr>
+      <tr><th>Developer</th><td>Up the Moon LLC — solo developer Ryo</td></tr>
+      <tr><th>Location</th><td>Japan</td></tr>
+      <tr><th>Tech stack</th><td>React Native · Expo New Architecture · Supabase</td></tr>
+      <tr><th>Privacy</th><td>No location data · device-local storage · Bluetooth LE for friend exchange</td></tr>
+      <tr><th>App Store</th><td><a href="https://apps.apple.com/jp/app/quilltsuki/id6772932240" target="_blank" rel="noopener">apps.apple.com/jp/app/quilltsuki/id6772932240</a></td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container-narrow">
+    <div class="eyebrow">Media Assets</div>
+    <h2>Downloadable materials</h2>
+    <p class="section-sub">High-resolution assets for editorial use. Contact press@upthemoon.co.jp for additional formats.</p>
+
+    <div class="asset-grid">
+      <div class="asset-card">
+        <h3>App icon</h3>
+        <p>1024×1024 PNG · transparent background</p>
+        <span class="placeholder">Available on request</span>
+      </div>
+      <div class="asset-card">
+        <h3>Screenshots</h3>
+        <p>6.7" iPhone · 1284×2778 · 5 panels</p>
+        <span class="placeholder">Available on request</span>
+      </div>
+      <div class="asset-card">
+        <h3>Photobook preview PDF</h3>
+        <p>Sample 12-page monthly format · 300 dpi</p>
+        <span class="placeholder">Available on request</span>
+      </div>
+      <div class="asset-card">
+        <h3>Logo lockup</h3>
+        <p>SVG · light and dark variants</p>
+        <span class="placeholder">Available on request</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container-narrow">
+    <div class="eyebrow">Press Contact</div>
+    <h2>Press Contact</h2>
+
+    <div class="contact-card">
+      <p><span class="label">Email</span> <a href="mailto:ryo@upthemoon.co.jp">ryo@upthemoon.co.jp</a></p>
+      <p><span class="label">Company</span> Up the Moon LLC (Japan)</p>
+      <p><span class="label">Website</span> <a href="https://upthemoon.co.jp" target="_blank" rel="noopener">upthemoon.co.jp</a></p>
+      <p><span class="label">App</span> <a href="https://quilltsuki.upthemoon.co.jp">quilltsuki.upthemoon.co.jp</a></p>
+      <p style="margin-top: 18px; font-size: 0.875rem; color: var(--fg-soft);">All media assets (app icons, screenshots, photobook preview PDF, logo lockup) are available upon request via email.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 Up the Moon LLC ·
+    <a href="/">Home</a> ·
+    <a href="https://upthemoon.co.jp" target="_blank" rel="noopener">Up the Moon</a>
+  </div>
+</footer>
+
+</body>
+</html>
