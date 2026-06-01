@@ -90,6 +90,24 @@
   .hero {
     padding: 140px 0 72px;
   }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .hero-image { display: flex; justify-content: center; }
+  .hero-image img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 24px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+                0 0 0 1px var(--gold-soft),
+                0 0 80px rgba(184, 151, 90, 0.08);
+  }
   .hero h1 .accent { color: var(--gold); }
   .hero-subtitle {
     margin: 18px 0 0;
@@ -234,6 +252,42 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
+  .asset-preview {
+    margin-bottom: 14px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .asset-preview-icon img {
+    width: 88px;
+    height: 88px;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    display: block;
+  }
+  .asset-preview-shots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+  .asset-preview-shots img {
+    width: 100%;
+    aspect-ratio: 1284 / 2778;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid var(--divider);
+  }
+  .asset-dl {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid var(--gold-soft);
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+  .asset-dl:hover { background: var(--gold-soft); opacity: 1; }
 
   /* Contact */
   .contact-card {
@@ -302,15 +356,22 @@
 
 <section class="hero">
   <div class="container">
-    <div class="eyebrow">Press Kit · October 2026</div>
-    <h1>Quilltsuki <span class="accent">2.0</span></h1>
-    <p class="hero-subtitle">Photo Journal &middot; Photobook &middot; Friends Calendar</p>
-    <p class="lead">
-      A minimal photo journal for iOS that turns daily moments into a printed photobook —
-      and makes sharing with close friends feel physical again.
-    </p>
-    <div class="hero-meta">
-      <span>iOS</span><span>·</span><span>October 2026</span><span>·</span><span>Up the Moon LLC · Japan</span>
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Press Kit · October 2026</div>
+        <h1>Quilltsuki <span class="accent">2.0</span></h1>
+        <p class="hero-subtitle">Photo Journal &middot; Photobook &middot; Friends Calendar</p>
+        <p class="lead">
+          A minimal photo journal for iOS that turns daily moments into a printed photobook —
+          and makes sharing with close friends feel physical again.
+        </p>
+        <div class="hero-meta">
+          <span>iOS</span><span>·</span><span>October 2026</span><span>·</span><span>Up the Moon LLC · Japan</span>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="qt-0.png" alt="Quilltsuki home screen" loading="eager">
+      </div>
     </div>
   </div>
 </section>
@@ -419,24 +480,34 @@
 
     <div class="asset-grid">
       <div class="asset-card">
+        <div class="asset-preview asset-preview-icon">
+          <img src="icon-1024.png" alt="Quilltsuki app icon" loading="lazy">
+        </div>
         <h3>App icon</h3>
         <p>1024×1024 PNG · transparent background</p>
-        <span class="placeholder">Available on request</span>
+        <a href="icon-1024.png" download="quilltsuki-app-icon-1024.png" class="asset-dl">Download PNG</a>
       </div>
       <div class="asset-card">
+        <div class="asset-preview asset-preview-shots">
+          <img src="qt-0.png" alt="Quilltsuki screenshot 1" loading="lazy">
+          <img src="qt-1.png" alt="Quilltsuki screenshot 2" loading="lazy">
+          <img src="qt-2.png" alt="Quilltsuki screenshot 3" loading="lazy">
+          <img src="qt-3.png" alt="Quilltsuki screenshot 4" loading="lazy">
+          <img src="qt-4.png" alt="Quilltsuki screenshot 5" loading="lazy">
+        </div>
         <h3>Screenshots</h3>
-        <p>6.7" iPhone · 1284×2778 · 5 panels</p>
-        <span class="placeholder">Available on request</span>
+        <p>6.7" iPhone · 1284×2778 · 5 panels (v1.0 — v2.0 to be added July 2026)</p>
+        <a href="qt-0.png" download class="asset-dl">Download set</a>
       </div>
       <div class="asset-card">
         <h3>Photobook preview PDF</h3>
         <p>Sample 12-page monthly format · 300 dpi</p>
-        <span class="placeholder">Available on request</span>
+        <span class="placeholder">Coming July 2026</span>
       </div>
       <div class="asset-card">
         <h3>Logo lockup</h3>
         <p>SVG · light and dark variants</p>
-        <span class="placeholder">Available on request</span>
+        <span class="placeholder">Coming July 2026</span>
       </div>
     </div>
   </div>
