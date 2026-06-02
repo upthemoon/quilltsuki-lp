@@ -23,8 +23,6 @@
     --gold: #B8975A;
     --gold-soft: rgba(184, 151, 90, 0.18);
     --gold-fade: rgba(184, 151, 90, 0.08);
-    --vermilion: #C04A38;
-    --vermilion-soft: rgba(192, 74, 56, 0.14);
     --fg: #F5F5F5;
     --fg-soft: #8A8070;
     --fg-mid: #C8C0B0;
@@ -182,23 +180,6 @@
     border: 1px solid var(--divider);
     border-radius: 4px;
     position: relative;
-  }
-  .design-card .seal {
-    position: absolute;
-    top: -10px;
-    right: 24px;
-    width: 32px;
-    height: 40px;
-    background: var(--vermilion);
-    color: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Noto Serif JP", serif;
-    font-weight: 700;
-    font-size: 0.8125rem;
-    letter-spacing: 0;
-    box-shadow: 0 4px 12px var(--vermilion-soft);
   }
   .design-card h3 { color: var(--fg); margin-bottom: 14px; }
   .design-card p { font-size: 0.9375rem; margin-bottom: 0; }
@@ -403,7 +384,7 @@
 
       <div class="pk-feature">
         <span class="pk-feature-title">Moon-phase design</span>
-        <p>The interface moves from new moon to full moon as the month progresses. Washi paper texture and a vermilion seal motif are woven through every screen — purposeful, not decorative.</p>
+        <p>The interface moves from new moon to full moon as the month progresses — a continuous visual rhythm rather than a daily streak counter.</p>
       </div>
 
       <div class="pk-feature">
@@ -427,26 +408,23 @@
 <section id="design" class="design-notes">
   <div class="container-narrow">
     <div class="eyebrow">Design Notes</div>
-    <h2>Moon phase · Washi paper · Vermilion seal</h2>
-    <p class="section-sub">Three motifs from Japanese craft, intentionally woven through every screen.</p>
+    <h2>What v2.0 actually does</h2>
+    <p class="section-sub">Three feature pillars — designed and built for slow record-keeping.</p>
 
     <div class="design-grid">
       <div class="design-card">
-        <div class="seal" role="img" aria-label="Moon-phase seal motif">月</div>
         <h3>Moon-phase calendar</h3>
         <p>The synodic cycle (29.53 days) drives a subtle gradient from new moon to full moon across the month grid. As you record, your days become moons. The calendar is not a tracker — it is a record of how time passed.</p>
       </div>
 
       <div class="design-card">
-        <div class="seal" role="img" aria-label="Washi paper seal motif">紙</div>
-        <h3>Washi paper texture</h3>
-        <p>Every background carries the grain of handmade washi. The texture is not skeuomorphic decoration — it is the visual anchor for the app's slowness. Each entry rests on paper, not on a screen.</p>
+        <h3>Photobook PDF</h3>
+        <p>Every entry becomes a page. Four formats: monthly (12p), seasonal (30p), six-month (60p), or annual (120p). Generated locally on device — no upload, no cloud round-trip. Print at year's end and hold the year in your hands.</p>
       </div>
 
       <div class="design-card">
-        <div class="seal" role="img" aria-label="Vermilion rakkan seal motif">朱</div>
-        <h3>Vermilion seal motif</h3>
-        <p>A single vermilion square — borrowed from the Japanese <em>rakkan</em> (落款) seal tradition — marks the day's record. The color is restrained, used only once per screen. It is the punctuation of the design language.</p>
+        <h3>Friends Calendar via Bluetooth LE</h3>
+        <p>Exchange an 8-character friend code, then connect over Bluetooth Low Energy. When you are physically near each other, both calendars open — for 24 hours. No location data is used. It is a quieter alternative to always-on social feeds.</p>
       </div>
     </div>
   </div>
