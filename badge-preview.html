@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quilltsuki v2.0 Build 15 — Badge + Moon Dict Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --surface: #14110E;
+    --gold: #B8975A;
+    --gold-soft: rgba(184, 151, 90, 0.25);
+    --silver: #C0C0C0;
+    --text: #F5F5F5;
+    --text-sub: rgba(245, 245, 245, 0.55);
+    --text-mid: rgba(245, 245, 245, 0.82);
+    --divider: rgba(184, 151, 90, 0.25);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", "Noto Sans JP", -apple-system, sans-serif;
+    line-height: 1.7;
+    padding: 48px 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 880px; margin: 0 auto; }
+
+  h1 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .sub {
+    color: var(--text-sub);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    margin-bottom: 48px;
+  }
+  h2 {
+    font-family: "Noto Serif JP", serif;
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    margin: 48px 0 8px;
+    color: var(--gold);
+  }
+  .h2-sub {
+    color: var(--text-sub);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+  .divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 32px 0;
+  }
+
+  /* Badge demo wrap */
+  .badge-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .badge-meta {
+    color: var(--text-sub);
+    font-size: 13px;
+  }
+
+  /* ───────── ProBadge variants (RN 実装と同等の見た目を CSS 再現) ───────── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-family: "Inter", sans-serif;
+    text-transform: none;
+    letter-spacing: 0.14em;
+    padding-left: 0.14em;
+  }
+
+  /* Pro: gold fill */
+  .badge-pro {
+    background: var(--gold);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  /* Pioneer: gold border, transparent fill, gold text */
+  .badge-pioneer {
+    border: 0.8px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* Creator: dark fill, gold border, silver text + gold crescent moon prefix */
+  .badge-creator {
+    background: var(--bg);
+    border: 0.8px solid var(--gold);
+    color: var(--silver);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    gap: 4px;
+  }
+  .badge-creator .moon-prefix {
+    color: var(--gold);
+    font-weight: 400;
+    margin-right: 2px;
+    line-height: 1;
+  }
+
+  /* Sizes */
+  .size-sm { font-size: 9px; padding: 2.5px 7px; }
+  .size-md { font-size: 11px; padding: 4px 10px; }
+  .size-lg { font-size: 14px; padding: 6px 14px; }
+
+  /* Status row (Settings 画面再現) */
+  .settings-section {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .settings-label {
+    color: var(--text-sub);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+  }
+  .status-text {
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  /* ───────── Moon Dictionary Modal Preview (RN MoonDictModal の見た目) ───────── */
+  .moon-card {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 380px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  .moon-symbol {
+    font-size: 56px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-family: serif;
+    line-height: 1;
+  }
+  .moon-eyebrow {
+    color: var(--silver);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .moon-primary {
+    font-family: "Noto Serif JP", serif;
+    color: var(--text);
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+  }
+  .moon-secondary {
+    color: var(--text-sub);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+  .moon-divider {
+    width: 32px;
+    height: 0.5px;
+    background: var(--gold);
+    margin: 18px auto;
+  }
+  .moon-divider-thin {
+    width: 24px;
+    height: 0.4px;
+    background: rgba(184, 151, 90, 0.4);
+    margin: 16px auto;
+  }
+  .moon-description {
+    color: var(--text-mid);
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 0 4px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .moon-cultural-label {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .moon-cultural {
+    color: rgba(245, 245, 245, 0.65);
+    font-size: 13px;
+    line-height: 1.7;
+    font-style: italic;
+    padding: 0 4px;
+    font-family: "Noto Sans JP", sans-serif;
+  }
+  .moon-close {
+    margin-top: 28px;
+    padding: 10px 32px;
+    border: 0.8px solid var(--divider);
+    border-radius: 999px;
+    color: var(--text-sub);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-weight: 300;
+    display: inline-block;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* Lang label */
+  .lang-tag {
+    display: inline-block;
+    background: rgba(184, 151, 90, 0.12);
+    color: var(--gold);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .note {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(184, 151, 90, 0.06);
+    border-left: 2px solid var(--gold);
+    border-radius: 4px;
+    color: var(--text-sub);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Quilltsuki v2.0 Build 15 — Badge + Moon Dict プレビュー</h1>
+  <div class="sub">Ryo 確認用 · 実装は React Native ・本ページは CSS 再現モック</div>
+
+  <!-- ============ Badges ============ -->
+
+  <h2>🏆 バッジ 3 種 (RN ProBadge.tsx variant)</h2>
+  <div class="h2-sub">size: sm (default) / md (Settings) / lg (大きく表示する場合)</div>
+
+  <div class="settings-section">
+    <div class="settings-label">Pro バッジ (variant="pro")</div>
+    <div class="badge-row">
+      <div class="badge badge-pro size-sm">Pro</div>
+      <div class="badge badge-pro size-md">Pro</div>
+      <div class="badge badge-pro size-lg">Pro</div>
+      <div class="badge-meta">金色塗りつぶし・黒文字</div>
+    </div>
+    <div class="status-row">
+      <div class="badge badge-pro size-md">Pro</div>
+      <div class="status-text">Pro 利用中</div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-label">Pioneer バッジ (variant="pioneer") · 2026/8/31 まで or 先着 500 名</div>
+    <div class="badge-row">
+      <div class="badge badge-pioneer size-sm">Pioneer</div>
+      <div class="badge badge-pioneer size-md">Pioneer</div>
+      <div class="badge badge-pioneer size-lg">Pioneer</div>
+      <div class="badge-meta">金色枠・透明背景・金文字</div>
+    </div>
+    <div class="status-row">
+      <div class="badge badge-pioneer size-md">Pioneer</div>
+      <div class="status-text">Pioneer 永久無料</div>
+    </div>
+  </div>
+
+  <div class="settings-section" style="border-color: var(--gold);">
+    <div class="settings-label" style="color: var(--silver);">★ 製作者バッジ (variant="creator") · Ryo 専用 · 「☾ Moon」確定版</div>
+    <div class="badge-row">
+      <div class="badge badge-creator size-sm"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="badge badge-creator size-md"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="badge badge-creator size-lg"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="badge-meta">黒背景 + 金三日月 ☾ + 金縁 + シルバー「Moon」(JP/EN 共通表記)</div>
+    </div>
+    <div class="status-row">
+      <div class="badge badge-creator size-md"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="status-text">製作者 (Up the Moon LLC)</div>
+    </div>
+    <div class="status-row">
+      <div class="badge badge-creator size-md"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="status-text">Creator (Up the Moon LLC)</div>
+    </div>
+
+    <div class="note">
+      <strong>デザイン意図</strong>:<br>
+      ☾ (三日月・gold #B8975A) はアプリアイコン QuillMoon の月モチーフと同色・同方向の三日月で、ブランド DNA を 1 シンボルで継承。<br>
+      Moon (シルバー #C0C0C0) は Up the Moon LLC の社名根源・シルバーで「静かな夜の月光」を表現。<br>
+      黒背景 + 金縁 = Pro 系と差別化された格上げ感・Ryo 唯一のステータスを視覚化。<br><br>
+      <strong>セキュリティ実装</strong>: Supabase <code>user_profiles.is_creator BOOLEAN</code> カラム + RLS。
+      Ryo の user_id にのみ手動 SQL で <code>true</code> 設定。他ユーザーは自分の <code>is_creator</code>
+      (常に false) しか SELECT 不可。パスワード経路なし・client side 偽装不可・絶対他者取得不可能。
+    </div>
+  </div>
+
+  <!-- ============ Settings 表示 完成形 ============ -->
+
+  <h2>📱 Settings 画面の Pro セクション完成形 (Ryo Build 15 実機想定)</h2>
+  <div class="h2-sub">Ryo は Creator + Pioneer + Pro 全部該当する想定 (Pioneer 期限内ダウンロード + 課金後)</div>
+
+  <div class="settings-section">
+    <div class="settings-label">Pro</div>
+    <div class="status-row">
+      <div class="badge badge-creator size-md"><span class="moon-prefix">☾</span>Moon</div>
+      <div class="status-text">製作者 (Up the Moon LLC)</div>
+    </div>
+    <div class="status-row">
+      <div class="badge badge-pioneer size-md">Pioneer</div>
+      <div class="status-text">Pioneer 永久無料</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-top: 0.5px solid var(--divider);">
+      <div style="color: var(--text); font-size: 14px;">フォトブック PDF 出力</div>
+      <div style="color: var(--text-sub); font-size: 12px;">写真と一行の記録から印刷できる PDF を作ります</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============ Moon Dictionary ============ -->
+
+  <h2>🌙 月相辞典ポップアップ (MoonDictModal) — 全 8 月相</h2>
+  <div class="h2-sub">Today タブ右上の月相シンボル tap で表示・隠れ機能</div>
+
+  <span class="lang-tag">日本語</span>
+
+  <div class="grid-2">
+
+    <!-- 1. 新月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">●</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">新月</div>
+      <div class="moon-secondary">朔 (さく)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">月が太陽と同じ方向にあり、地球からは見えない夜。月の始まりです。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">古来「朔」と書き、月の暦の始まりを示す日でもありました。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 2. 三日月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">☽</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">三日月</div>
+      <div class="moon-secondary">眉月 (まゆづき)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">新月から数えて 3 日目に見える、細く弓なりの月。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">「眉月」とも呼ばれ、女性の眉の形になぞらえた古い表現です。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 3. 上弦の月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">◐</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">上弦の月</div>
+      <div class="moon-secondary">弓張月 (ゆみはりづき)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">月の右半分が明るく見える半月。夕方に空高く上ります。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">弓を張ったような形から「弓張月」と呼ばれてきました。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 4. 十三夜 -->
+    <div class="moon-card">
+      <div class="moon-symbol">◗</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">十三夜</div>
+      <div class="moon-secondary">小望月 (こもちづき)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">満月に近づく、ほぼ満たされた月。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">十五夜と並んで「後の月」として愛でられる、日本独自の月見の夜。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 5. 十五夜 -->
+    <div class="moon-card" style="border-color: var(--gold);">
+      <div class="moon-symbol" style="font-size: 64px;">○</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">十五夜</div>
+      <div class="moon-secondary">望月 (もちづき)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">太陽の光を一面に受けて輝く、最も明るい夜。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">中秋の名月として古来より愛され、芒や月見団子で月を迎える風習があります。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 6. 居待ち月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">◖</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">居待ち月</div>
+      <div class="moon-secondary">十六夜 (いざよい)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">満月を過ぎて少し欠けはじめる月。出るのを待つほどに少しずつ遅れます。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">「いざよう (ためらう)」が語源。月が出るのをためらうように遅く昇る様子から名付けられました。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 7. 下弦の月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">◑</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">下弦の月</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">月の左半分が明るく見える半月。真夜中に上り、明け方に空高くにあります。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">上弦と対をなす月で、月の周期の後半を示します。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+    <!-- 8. 有明の月 -->
+    <div class="moon-card">
+      <div class="moon-symbol">☾</div>
+      <div class="moon-eyebrow">今夜の月</div>
+      <div class="moon-primary">有明の月</div>
+      <div class="moon-secondary">残月 (ざんげつ)</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">夜明け前の空に細く残る月。次の新月までの静かな移ろいです。</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">文化メモ</div>
+      <div class="moon-cultural">古典文学では「有明」は別れや余韻を象徴する語として詠まれてきました。</div>
+      <div class="moon-close">閉じる</div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <span class="lang-tag">English</span>
+
+  <div class="grid-2">
+
+    <div class="moon-card" style="border-color: var(--gold);">
+      <div class="moon-symbol" style="font-size: 64px;">○</div>
+      <div class="moon-eyebrow">Tonight's moon</div>
+      <div class="moon-primary">Full moon</div>
+      <div class="moon-secondary">Jūgoya</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">The brightest night — the moon reflects the full light of the sun.</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">Cultural note</div>
+      <div class="moon-cultural">The mid-autumn full moon ("Jūgoya") has been celebrated for centuries with susuki grass and tsukimi dango.</div>
+      <div class="moon-close">Close</div>
+    </div>
+
+    <div class="moon-card">
+      <div class="moon-symbol">◖</div>
+      <div class="moon-eyebrow">Tonight's moon</div>
+      <div class="moon-primary">Waning gibbous</div>
+      <div class="moon-secondary">Izayoi / Imachi-zuki</div>
+      <div class="moon-divider"></div>
+      <div class="moon-description">The moon begins to wane after the full moon, rising slightly later each night.</div>
+      <div class="moon-divider-thin"></div>
+      <div class="moon-cultural-label">Cultural note</div>
+      <div class="moon-cultural">Named for "izayou" — to hesitate — describing the way the moon seems to delay its rising.</div>
+      <div class="moon-close">Close</div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    <strong>表示内容のソース</strong>: <code>src/lib/moonDictionary.ts</code> (本日 commit `56196ca` で新規作成)。<br>
+    8 月相 × JP/EN コンテンツ × (主名 + 別名 + 解説 + 文化メモ)。<br>
+    古典文学・季語・伝承から取材した日本独自の月相名 (十五夜・居待ち月・有明月 等) を表示。
+  </div>
+
+  <div class="divider"></div>
+
+  <h2>🎨 設計判断メモ (Ryo 用)</h2>
+
+  <div class="note">
+    <strong>「☾ Moon」確定 (2026-06-02 Ryo OK)</strong>: 三日月 ☾ (金) + Moon (シルバー) の組み合わせで Up the Moon LLC のブランド DNA を継承。アプリアイコン QuillMoon と同じ月モチーフ。<br><br>
+    <strong>配色階層</strong>: Pro = 金塗りつぶし / Pioneer = 金枠透明 / Creator (Moon) = 黒背景 + 金縁 + 金三日月 + シルバー文字 = 最高位の差別化。<br><br>
+    <strong>JP/EN 共通表記</strong>: 「Moon」は短く国際的に伝わる単語で、JP 文脈でも「ムーン」として自然。アプリ全体の universal design。
+  </div>
+
+  <h2>📝 月相辞典 全 8 月相 一覧表</h2>
+
+  <div class="settings-section">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--divider);">
+          <th style="text-align: left; padding: 10px 4px; color: var(--gold);">区分</th>
+          <th style="text-align: left; padding: 10px 4px; color: var(--gold);">JP 主名</th>
+          <th style="text-align: left; padding: 10px 4px; color: var(--gold);">JP 別名</th>
+          <th style="text-align: left; padding: 10px 4px; color: var(--gold);">EN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">new</td>
+          <td style="padding: 10px 4px;">新月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">朔</td>
+          <td style="padding: 10px 4px;">New moon / Saku</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">waxing-crescent</td>
+          <td style="padding: 10px 4px;">三日月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">眉月</td>
+          <td style="padding: 10px 4px;">Waxing crescent / Mikazuki</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">first-quarter</td>
+          <td style="padding: 10px 4px;">上弦の月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">弓張月</td>
+          <td style="padding: 10px 4px;">First quarter / Yumiharizuki</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">waxing-gibbous</td>
+          <td style="padding: 10px 4px;">十三夜</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">小望月</td>
+          <td style="padding: 10px 4px;">Waxing gibbous / Jūsanya</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">full</td>
+          <td style="padding: 10px 4px;">十五夜</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">望月</td>
+          <td style="padding: 10px 4px;">Full moon / Jūgoya</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">waning-gibbous</td>
+          <td style="padding: 10px 4px;">居待ち月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">十六夜</td>
+          <td style="padding: 10px 4px;">Waning gibbous / Izayoi</td>
+        </tr>
+        <tr style="border-bottom: 0.5px solid var(--divider);">
+          <td style="padding: 10px 4px; color: var(--text-sub);">last-quarter</td>
+          <td style="padding: 10px 4px;">下弦の月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">—</td>
+          <td style="padding: 10px 4px;">Last quarter</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 4px; color: var(--text-sub);">waning-crescent</td>
+          <td style="padding: 10px 4px;">有明の月</td>
+          <td style="padding: 10px 4px; color: var(--text-sub);">残月</td>
+          <td style="padding: 10px 4px;">Waning crescent / Ariake no tsuki</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>
